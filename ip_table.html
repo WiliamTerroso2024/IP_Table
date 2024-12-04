@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela de IPs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    .input-section {
+      margin-bottom: 20px;
+    }
+    .input-section input {
+      margin: 5px;
+      padding: 8px;
+      width: 200px;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .table th, .table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .table th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Título antes dos inputs -->
+    <h1>IP Table</h1>
+    
+    <div class="input-section">
+      <input type="text" id="ipAddress" placeholder="Endereço IP">
+      <input type="text" id="mask" placeholder="Máscara">
+      <input type="text" id="version" placeholder="Versão">
+      <button class="btn" id="addButton">Add</button>
+    </div>
+
+    <table class="table" id="ipTable">
+      <thead>
+        <tr>
+          <th>IP Address</th>
+          <th>Mask</th>
+          <th>Version</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Os dados vão aparecer aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Seleção dos elementos HTML
+    const ipAddressInput = document.getElementById('ipAddress');
+    const maskInput = document.getElementById('mask');
+    const versionInput = document.getElementById('version');
+    const addButton = document.getElementById('addButton');
+    const ipTableBody = document.querySelector('#ipTable tbody');
+
+    // Função para adicionar um novo IP na tabela
+    addButton.addEventListener('click', function() {
+      const ipAddress = ipAddressInput.value;
+      const mask = maskInput.value;
+      const version = versionInput.value;
+
+      if (ipAddress && mask && version) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${ipAddress}</td>
+          <td>${mask}</td>
+          <td>${version}</td>
+        `;
+        ipTableBody.appendChild(row);
+
+        // Limpar os campos de input
+        ipAddressInput.value = '';
+        maskInput.value = '';
+        versionInput.value = '';
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
+    });
+  </script>
+
+</body>
+</html>
